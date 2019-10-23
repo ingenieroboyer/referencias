@@ -1,0 +1,79 @@
+CONECTAR CON MONGO
+
+from pymongo import MongoClient
+client = MongoClient('localhost', 27017)
+db=client.get_database('pruebas')
+
+
+
+IMPORTAR UNA BASE DE DATOS A UN DATAFRAME
+import pymongo
+import pandas as pd
+from pymongo import MongoClient
+client = MongoClient()
+db = client.database_name
+collection = db.collection_name
+data = pd.DataFrame(list(collection.find()))
+
+
+CREAR UNA COLECCIÓN
+col=db.ficha
+
+
+INSERTAR UN DATA FRAME A UNA COLLECTION
+
+
+
+
+
+CONCATENAR DOS DATAFRAMES
+frames = [personalCnn, personalChV]
+result = pd.concat(frames)
+	result es un dataframe con la suma de las filas de personalChV y personalCnn
+
+
+
+
+
+SELECCIONAR FILAS
+Con un valor
+df.loc[df['column_name'] == some_value]
+
+Con valores iterables
+df.loc[df['column_name'].isin(some_values)]
+
+Varias condiciones 
+df.loc[(df['column_name'] >= A) & (df['column_name'] <= B)]
+
+Excluyente
+df.loc[df['column_name'] != some_value]
+
+
+Maximizar
+df['Name'].max()
+
+
+ELIMINAR DUPLICADOS
+df = df.drop_duplicates()
+
+
+
+!!!!!!!!!!!!!!!!!!!!     AÑADIR UNA FUNCIÒN PARA PROCESAR LOS DATOS    !!!!!!!!!!!!!!!!!!!!!!!!
+
+ 
+
+consindicato2["prueba"] = consindicato2["COL1"].fillna(df["COL2"])
+
+
+////////////////////////////////////////////
+
+GUARDAR 
+
+
+
+
+
+
+
+
+

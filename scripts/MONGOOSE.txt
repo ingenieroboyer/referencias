@@ -1,0 +1,153 @@
+
+CAMBIAR NOMBRE DEL CAMPO	
+db.trabajadores.update({}, {$rename:{"Apellido Paterno":"lastname"}}, false, true);
+
+
+db.trabajadores.update({}, {$rename:{"Apellido Paterno":"lastname"}}, false, true);
+{multi: true, safe: true} 
+
+ELIMINAR CAMPO de un registro
+	db.trabajadores.update({}, {$unset:{"Name":"name"}});
+ELIMINAR UN REGISTRO
+	db.getCollection("employee").deleteOne({name:'juncito'}) ;
+
+
+ELIMINAR CAMPO de una colección
+	db.trabajadores.update({},   {$unset: {'Tipo Contrato': true}},   {multi: true, safe: true} );
+
+
+
+CREAR UN CAMPO EN TODOS LOS DOCUMENTOS
+db.trabajadores.update({},   {$set: {company: CDF}},   {multi: true, safe: true} );
+
+BORRAR UN CAMPO
+db.posts.remove({"autor": "Francisco"})
+
+
+DESCRIBIR UNA COLECCIÓN
+> var esquema = db.sindicato.findOne();
+> for(var key in esquema){print(key)};
+
+
+
+
+
+IMPORTAR
+JSON
+mongoimport --db erme --collection roles --type json --file /home/tecnoboy/PROYECTOS/warnermedia-back-express/db/roles.json
+CSV
+mongoimport --db pruebas --collection cnnWorkers --type csv --headerline  --file /home/tecnoboy/CRECER/trato_data/data/trabajadadores/cnnPersonal.csv
+
+
+EXPORTAR
+mongoexport --db erme --collection roles --type json --out /home/tecnoboy/Escritorio/traffic.json
+
+
+///////////////////////////  AGGREGATE //////////////////////
+
+db.trabajadores.aggregate([{$match:{"rut":"8.210.877-7"}}]);
+
+
+
+AÑADIR UNA COLECCIÒN COMO EMBEBIDA EN OTRA COLECCIÓN
+db.worker.aggregate([
+{
+    $lookup: {itemDescription: { $concat: [ "machaza", " - ", "$company" ] }    }
+        
+},
+
+        {$out : "wrokersallalin"  }
+])
+
+
+
+////
+{ "_id" : 8751, "title" : "The Banquet", "author" : "Dante", "copies" : 2 }
+{ "_id" : 8752, "title" : "Divine Comedy", "author" : "Dante", "copies" : 1 }
+{ "_id" : 8645, "title" : "Eclogues", "author" : "Dante", "copies" : 2 }
+{ "_id" : 7000, "title" : "The Odyssey", "author" : "Homer", "copies" : 10 }
+{ "_id" : 7020, "title" : "Iliad", "author" : "Homer", "copies" : 10 }
+
+	
+////
+
+
+
+db.cnnWorkers.aggregate([
+{
+    $lookup: { 
+     from: "cnnAdmin", 
+     localField: "rut", 
+     foreignField: "rut", 
+     as: "admin" 
+    } 
+        
+},
+
+        {$out : "workers"  }
+])
+
+////////////////
+db.cnnWorkers.aggregate([{$lookup: { from: "cnnPersonal", localField: "rut", foreignField: "rut", as: "personal" } },{$out : "workers1"  }])
+
+
+
+
+
+
+mongoimport --db erme --collection workers --file /home/tecnoboy/CRECER/trato_data/data/trabajadadores/cdfs.json
+
+
+/home/tecnoboy/CRECER/trato_data/data/trabajadadores/ModeloDatos/Respaldos/workers.json
+
+ELIMINAR UN CAMPO EN SUBDOCUMENTO 
+	db.workers.updateMany( {}, { $unset: { "personal.0.rut": 1 } } )
+
+ELIMINAR MUCHOS DOCUMENTOS
+	db.getCollection('workers').deleteMany({company:'cdf'})	
+
+
+
+
+BUSCAR CON CRITERIO DE FECHAS
+	db.workers.find({'admin.0.discharge_date': {"$gte": "2019-10-01T15:00:00.000Z"}})
+
+CAMBIAR VALOR DE CAMPO EN TODOS LOS DOCUMENTOS QUE CUMPLAN CON LA CONDICIÓN DEL $gte
+	db.workers.update({'admin.0.discharge_date': {"$gte": "2019-10-01T15:00:00.000Z"}},{$set:{ 'admin.0.discharge_date':null}},{multi:true})
+
+
+BUSCAR EXCLUYENDO CIERTOS CRITERIOS
+db.workers.find( { company: { $nin: [ 'cnn', 'ChileVision','cdf' ] } } )
+
+
+VER SI  UN CAMPO NO EXISTE
+	db.getCollection('piloto2_copy').find({lab_union:{$exists:false}}).count()
+
+sw_variablepersona_201910010936
+
+
+
+ELIMINAR MUCHOS
+
+db.getCollection('dbtrabajo').deleteMany({valor:NaN},{multi:true})
+
+CUANTOS REGISTROS EXISTEN DIFERENTES DE LA LISTA DE VALORES
+db.getCollection('workers').find({ lab_union: { $exists: true, $nin: ['0','1','2','3','4','5'] }}).count()
+		: incluye los valores donde el campo tiene null como valor
+
+db.getCollection('CDFpiloto').find({sindicato:{$exists: true,$ne:[0,3]}}).count()
+
+______ DESDE HACIA_____
+
+
+
+
+EXPORTAR UNA COLECCIÒN COMO JSON
+		mongoexport --db pruebas --collection workers2 --out workers.json
+
+
+IMPORTAR UNA COLLECIÓN DE UN JSON
+mongoimport --db erme --collection CDFpiloto --file CDFpiloto.json
+ 
+
+
