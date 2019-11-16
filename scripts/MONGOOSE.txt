@@ -34,13 +34,16 @@ DESCRIBIR UNA COLECCIÓN
 
 IMPORTAR
 JSON
-mongoimport --db erme --collection roles --type json --file /home/tecnoboy/PROYECTOS/warnermedia-back-express/db/roles.json
+mongoimport --db erme --collection workers --type json --file /home/tecnoboy/TRABAJO/Contingencia/warnermedia-back-express/db/workers.json
+
+
+
 CSV
 mongoimport --db pruebas --collection cnnWorkers --type csv --headerline  --file /home/tecnoboy/CRECER/trato_data/data/trabajadadores/cnnPersonal.csv
 
 
 EXPORTAR
-mongoexport --db erme --collection roles --type json --out /home/tecnoboy/Escritorio/traffic.json
+mongoexport --db erme --collection workers --type json --out /home/tecnoboy/PROYECTOS/warnermedia-back-express/db/workers.json
 
 
 ///////////////////////////  AGGREGATE //////////////////////
@@ -149,5 +152,13 @@ EXPORTAR UNA COLECCIÒN COMO JSON
 IMPORTAR UNA COLLECIÓN DE UN JSON
 mongoimport --db erme --collection CDFpiloto --file CDFpiloto.json
  
+
+
+
+mongoimport --db erme --collection roles --type json --file /home/staging/desarrollo/data/bdauxiliares_backend_erme/roles.json
+
+
+
+db.createUser({user: "lboyer",pwd: "dev20!",roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]})
 
 

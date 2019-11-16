@@ -1,0 +1,254 @@
+ELIMINAR
+1.- use <basededatos>
+2.- db.dropDatabase()
+
+
+ACTUALIZAR
+db.productos.update({"nombre":"yuquitas"},{$unset:{"descripcion":""}});
+
+MOSTRAR elementos
+1.- use <basededatos>
+2.-db.<nombrecolleccion>.find()
+
+CREAR
+1.- use <nombre DB  Nueva>
+2.- db.<nombre Collecion nueva>.save({titulo:'Batman el caballero oscuro'});
+
+   ...osea se crea utilizandola
+
+
+ELIMINAR documento 
+1.- use <DB>
+2.- db.<nombre de la colección>.remove({"titulo" : "Batman el caballero oscuro"},1);
+ ...Se borrará solo uno.
+
+ELIMINAR un campo de una colección
+
+db.millonSpain.update(nombre:$exists:true,$unset: idContacto:"" ,multi: true)
+
+He remarcado en rojo los parámetros más importantes el primero, $exists:true dice que el campo nombre debe existir, de esta forma hacemos que se aplique en todos los registros, por otro lado he marcado en negrita el nombre del campo que queremos eliminar con idContacto:"" y la opción más importante para que se aplique a todos los registros multi: true
+
+
+QUITANDO ELEMENTOS DE UN ARRAY
+db.genbetadev.update(
+ {"_id" : 2},
+ {$pull : {"votes" : 13}}
+);
+
+Si queremos eliminar elementos del array, podemos utilizar los operadores $pull y $pullAll. Por ejemplo, vemos que se han producido errores al insertar elementos en el campo votes. El campo representa los votos que recibe una película por parte de cada usuario. Los valores permitidos van de 1 a 10, pero por error se han añadido elementos con un valor de 13. Para eliminarlos bastaría con ejecutar la siguiente sentencia:
+
+QUITANDO UNA PROPIEDAD DE UNA COLECCIÓN
+
+db.DataEstructurada.update({"tension":{$exists:true}},{$unset:{"contexto":""}},{multi:true});
+
+
+VER EL ÚLTIMO REGISTRO
+db.DataEstructurada.find().sort({tag:1}).limit(10).sort({$natural:-1})
+
+VER LAS TAREAS PARA UN USUARIO EL DÍA DE HOY
+db.getCollection('tareas').find({_id : { $gt : ObjectId(Math.floor(new Date(new Date().getFullYear()+'/'+(new Date().getMonth()+1)+'/'+new Date().getDate())/1000).toString(16)+"0000000000000000") }})
+
+
+REPALDO MEDIANTE DUMP
+mongodump --db ee_data --port 28999  (no desde mongodb ejecutandose)
+tar -czvf dump.tar.gz dump
+
+scp uper@192.168.1.119:/home/uper/dump.tar.gz /home/tecnoboy/Desarrollo/Data
+tar -zxvf dump.tar.gz
+mongorestore --drop --db ee_data dump/ee_data
+
+
+
+BUSCAR ENTRE DOS FECHAS
+db.DataEstructurada.find({"tag":{"$lte":"Tue May 21 12:27:29 2019","$gte":"Tue May 21 11:49:08 2019"}}).count()
+
+CORTAR EL CONTENIDO DE UN ESTRING CON AGGREGATE
+
+db.piloto.aggregate( { $group: { _id: { año: {$substr:["$tag",20,30]}} } } )
+
+
+
+CONVERTIR DATASTRING A ISODate
+
+db.piloto.aggregate([{$project:{date:{$dateFromString:{dateString:'$tag'}}}}])
+
+
+CONSULTA EN SUBDOCUMENTO
+db.people.find({ friends: { id:1, name:"Trinity Ford" } })
+
+
+UPDATE DE CAMPO
+            tarea.update({
+                    _id: identificador
+                }, {
+                    $set: {
+                        actualizacion: {
+                            usuario: decoded.nombre,
+                            fecha_check: time,
+                            comentario: comentario
+                        }
+                    }
+                }, {
+                    upsert: true,
+                    setDefaultsOnInsert: true
+                },
+                function(err, doc) {
+                    if (err) {
+                        return res.status(401).json({
+                            ok: false,
+                            err
+                        });
+                    } else {
+                        tarea.find({ asignado: decoded.nombre })
+                            .sort({ tag: 1 })
+                            .limit(50)
+                            .sort({ $natural: -1 })
+                            .exec((err, tareas) => {
+                                if (err) {
+                                    return res.status(400).json({
+                                        ok: false,
+                                        err: err
+                                    });
+                                }
+                                res.render('usuarioUser', {
+                                    token: token,
+                                    tareas: JSON.stringify(tareas),
+                                    anio: new Date().getFullYear()
+                                });
+                            });
+
+                    }
+                });
+
+
+
+
+
+
+////////////////PRUEBAS
+
+
+db.millonSpain.update(
+nombre:$exists:true,
+$unset: descripcion:"" ,
+multi: true
+);
+
+db.DataEstructurada.update({corriente:$exists:true,$unset: contexto:"" ,multi: true})
+
+EJEMPLOS
+db.productos.save({"nombre" : "yuquitas", "descripcion" : "Crujientes, sabor mediterraneo", "precio" : 2.5});
+
+db.productos.update({"nombre":"yuquitas"},{$unset:{"descripcion":""}});
+db.productos.update({"nombre":{$exists:true}},{$unset:{"precio":""}},{multi:true});
+db.DataEstructurada.update({"tension":{$exists:true}},{$unset:{"contexto":""}},{multi:true});
+
+
+
+
+
+
+////////////////////
+PARA REVISAR
+
+OBTENER EL AÑO
+
+db.p.aggregate(
+    { $match : { "tag" : {$in : [/2019-06/]}}},
+    { $group : {
+        tag: {
+            year :  { $substr : ["$tag", 0, 4 ] },   
+            month : { $substr : ["$tag", 5, 2 ] },                                      
+            day :   { $substr : ["$tag", 8, 2 ] },        
+        },
+        count: { $sum: 1 }
+    }
+              },
+    { $sort : {tag : -1}}
+);
+
+
+
+db.DataEstructurada.find({"tag":{year:"$tag"}})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREAR EL USUARIO ADMIN
+db.addUser(
+  {
+    user: "lboyer",
+    pwd: "uper19!",
+    roles: [ { role: "root", db: "admin" } ]
+  })
+
+
+db.piloto.aggregate( { $group: { _id: { $dayOfYear: "$tag"} } } )
+
+db.piloto.aggregate( { { "$project" : { "count" : 1 ,"tag" : 1 ,"duration" : {"$month" : "$tag" } }})
+
+db.piloto.aggregate( { { "$project" :{"tag" : 1 ,"duration" : {"$month" : "$tag" } }})
+
+db.piloto.find({}).forEach(function(hab) {hab.tag=new ISODate(hab.tag);db.piloto.save(hab);})
+
+
+
+///////////////////////CONSULTA kWh /////////////////////
+
+db.piloto.aggregate({$project:{date:{$dateFromString:{dateString:'$tag'}},corriente:'$corriente'}})
+
+{ "_id" : ObjectId("5d0137be74fece7b8b33ac7a"), "date" : ISODate("2019-06-12T13:34:54Z"), "corriente" : 1.07 }
+{ "_id" : ObjectId("5d01388b74fece7cbf26ce06"), "date" : ISODate("2019-06-12T13:38:19Z"), "corriente" : 1.1 }
+{ "_id" : ObjectId("5d0138ab74fece7cbf26ce07"), "date" : ISODate("2019-06-12T13:38:51Z"), "corriente" : 1.09 }
+
+
+
+ Concatenacion de criterios
+
+> db.piloto.aggregate({$project:{date:{$dateFromString:{dateString:'$tag'}},corriente:'$corriente'}},{$group:{_id: { dia:{$month: "$date"} }  }})
+{ "_id" : { "dia" : 6 } }
+
+
+{$match:{ "createdAt":{$gt: lastHour}, }} <=====  UTILIZAR ESTE
+
+
+db.piloto.aggregate({$project:{date:{$dateFromString:{dateString:'$tag'}},corriente:'$corriente'}},{$match:{ "date":{$gt: lastHour}, }})
+
+
+
+LAS TAREAS DE HOY
+db.getCollection('tareas').find({_id : { $gt : ObjectId(Math.floor(new Date(new Date().getFullYear()+'/'+(new Date().getMonth()+1)+'/'+new Date().getDate())/1000).toString(16)+"0000000000000000") }}).count()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
