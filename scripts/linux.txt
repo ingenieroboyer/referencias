@@ -1,0 +1,82 @@
+Logearse como usuario
+
+	login staging
+
+
+Puertis TCP abiertos 
+			netstat -lt
+
+
+
+Desplegar con pm2
+	pm2 start npm --name " warnermedia-front" -- run dev	
+
+
+
+
+Ver los puertos en uso
+		netstat -putona
+		
+		sudo ss -tulpn  !!
+
+
+
+Ver la tabla de direccionamiento estático
+	ip route show
+
+Limpiar pantalla	Ctrl + l  ==  clear
+
+
+Ver datalles de los enlaces simbólicos
+	ll  === ls -l
+
+
+Ver que puertos están abiertos en otra máquina
+ nmap 10.3.75.86
+
+
+CONFIGURAR MONGO PARA PERMITIR ACCESO REMOTO
+	
+
+# network interfaces
+net:
+  port: 27017
+  bindIp: 127.0.0.1,<<ip del servidorY
+>> # Enter 0.0.0.0,:: to bind to all interfaces
+
+
+Matar proceso que ocupa el puerto especif
+fuser -k 3010
+
+CENTOS////
+
+
+Firewall iptable:
+
+Listar las reglas
+	iptables -L
+
+Añadir regla para paquetes entrantes TCP
+	iptables -I INPUT -p tcp -m tcp --dport 27017 -j ACCEPT
+ 
+
+
+////////////////////LEVANTAR CON Nginx
+
+1.- Crear el directorio
+	sudo mkdir -p /var/www/erme/html
+
+2.- Darle permisos
+	sudo chown -R $USER:$USER /var/www/erme/html
+	sudo chmod -R 755 /var/www
+
+
+
+	
+
+
+
+
+
+
+

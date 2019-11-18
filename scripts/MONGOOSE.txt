@@ -1,4 +1,15 @@
+CRUD
 
+Crear un documento dentro de una collección
+	var Tank = mongoose.model('Tank', yourSchema);
+	var small = new Tank({ size: 'small' });
+	small.save(function (err) {
+		  if (err) return handleError(err);
+		  // saved!
+	});
+
+
+****************
 CAMBIAR NOMBRE DEL CAMPO	
 db.trabajadores.update({}, {$rename:{"Apellido Paterno":"lastname"}}, false, true);
 
@@ -29,19 +40,27 @@ DESCRIBIR UNA COLECCIÓN
 > for(var key in esquema){print(key)};
 
 
+GROUP   GROUP   GROUP   GROUP  GROUPGROUP
+
+	 db.getCollection('orgs').aggregate([{$group:{_id:"$department"}}])
+
+Agrupar y mostrar valores de los agrupados
+	Workers.aggregate([{$group:{_id:"$department",info:{$push:{JobTitle:"$JobTitle",department:"$department",email:"$email"}}}}]);  !!!!!
+
+	db.getCollection('workers').aggregate([{$group:{_id:"$department",persons: {$addToSet: "$JobTitle"},num_personas:{$sum:1}}}])
+
 
 
 
 IMPORTAR
 JSON
-mongoimport --db erme --collection roles --type json --file /home/tecnoboy/PROYECTOS/warnermedia-back-express/db/roles.json
+mongoimport --db erme --collection workerpre --type json --file /home/tecnoboy/PROYECTOS/warnermedia-back-express/db/workers.json
 CSV
 mongoimport --db pruebas --collection cnnWorkers --type csv --headerline  --file /home/tecnoboy/CRECER/trato_data/data/trabajadadores/cnnPersonal.csv
 
 
 EXPORTAR
-mongoexport --db erme --collection roles --type json --out /home/tecnoboy/Escritorio/traffic.json
-
+mongoexport --db erme --collection workers --type json --out /home/tecnoboy/PROYECTOS/warnermedia-back-express/db/workers.json
 
 ///////////////////////////  AGGREGATE //////////////////////
 
@@ -106,8 +125,8 @@ ELIMINAR UN CAMPO EN SUBDOCUMENTO
 ELIMINAR MUCHOS DOCUMENTOS
 	db.getCollection('workers').deleteMany({company:'cdf'})	
 
-
-
+BUSCAR CON CRITERIO DE EXCLUSION
+	db.getCollection('workers4').find({lab_union:{$nin:['1','2','3','4','5','0']}})
 
 BUSCAR CON CRITERIO DE FECHAS
 	db.workers.find({'admin.0.discharge_date': {"$gte": "2019-10-01T15:00:00.000Z"}})
@@ -119,6 +138,10 @@ CAMBIAR VALOR DE CAMPO EN TODOS LOS DOCUMENTOS QUE CUMPLAN CON LA CONDICIÓN DEL
 BUSCAR EXCLUYENDO CIERTOS CRITERIOS
 db.workers.find( { company: { $nin: [ 'cnn', 'ChileVision','cdf' ] } } )
 
+
+
+EXPRESION REGURAR
+	db.getCollection('workers').find({company:'cdf', email: /@turner/  })
 
 VER SI  UN CAMPO NO EXISTE
 	db.getCollection('piloto2_copy').find({lab_union:{$exists:false}}).count()

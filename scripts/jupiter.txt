@@ -1,0 +1,10 @@
+Levantar Jupiter
+source bin/activate
+
+jupyter notebook
+
+
+
+
+
+

@@ -1,1 +1,20 @@
 set DEBUG=myapp:* & npm start
+
+
+FOREVER
+
+Lanzar una app
+
+	forever start <nobre del archivo que contine la config de establecimiento>
+
+
+Revisar cuantas apps están arribas por forever
+
+	forever list
+
+ 
+
+
+
+
+
