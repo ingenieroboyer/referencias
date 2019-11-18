@@ -1,0 +1,5 @@
+ git log --stat
+	imprime tras cada confirmación una lista de archivos modificados, indicando cuántos han sido modificados y cuántas líneas han sido añadidas y eliminadas para cada uno de ellos, y un resumen de toda esta información
+
+
+

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Logearse como usuario
 
 	login staging
@@ -73,10 +74,36 @@ Añadir regla para paquetes entrantes TCP
 
 
 	
+=======
+COPIAR ARCHIVOS REMOTOS
+scp tecnoboy@10.3.67.94:/home/tecnoboy/PROYECTOS/warnermedia-back-express/db/workers.json mongoexport --db erme --collection workers --type json --out /home/tecnoboy/PROYECTOS/warnermedia-back-express/db/workers.json 
+
+Copiar un archivo local a un destino remoto
+scp /ruta/al/archivo-origen usuario@ordenador:/ruta/al/directorio-destino/
+
+
+PUERTOS ACTIVOS
+sudo lsof -i -P -n | grep LISTEN
+
+
+Matar el proceso bien
+kill -9 12576
+
+>>>>>>> 7aa37e5e9cc668ce28f98d6f0ad6f17e53151f8e
 
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+EJEMPLOS
+scp /home/tecnoboy/TRABAJO/ModeloDatos/bdauxiliares_backend_erme.tar.xz staging@10.3.75.86:/ruta/al/directorio-destino/
+
+
+Descomprimir .xz
+
+ tar -Jxvf bdauxiliares_backend_erme.tar.xzy
+>>>>>>> 7aa37e5e9cc668ce28f98d6f0ad6f17e53151f8e

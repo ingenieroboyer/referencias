@@ -1,0 +1,24 @@
+  
+
+COMPARAR referencia CON HOY.
+
+ var f1 = new Date(referencia);
+    var f2 = new Date();
+    f1 = f1.setHours(0, 0, 0, 0);
+    f2 = f2.setHours(0, 0, 0, 0);
+
+    if (f1 === f2) {
+
+        var estatus = 'activo';
+
+
+    } else {
+        var estatus = 'pendiente';
+
+
+    }
+
+
+para aplicar las 
+
+.toLocaleString('es-ES', { timeZone: 'America/Santiago' })
