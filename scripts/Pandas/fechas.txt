@@ -1,0 +1,38 @@
+OBTENER EL DIA
+
+	sr = pd.to_datetime(sr) 
+	result = sr.dt.day
+
+
+CONVERTIR OBJECT A DATE_TIME
+	data['fecha_fin'] = pd.to_datetime(data['fecha_fin'])
+
+
+OBTENER DIFERENCIA DE FECHAS COMO ENTERO
+	data['fecha_fin'] = pd.to_datetime(data['fecha_fin'])
+	data['fecha_pago'] = pd.to_datetime(data['fecha_pago'])
+	data['diferencia']=data.fecha_fin-data.fecha_pago
+	data['diferenciafloat'] = data.apply(lambda row: row.diferencia.days, axis=1)
+
+		Esto hace que la columna 'diferenciafloat' tenga un entero que es la dif de dias  entre las fechas (data.fecha_fin-data.fecha_pago)
+
+CONVERTIR UNA FECHA EN EL INDICE
+	usuarios_sub.index =usuarios_sub['fecha_fin']
+	
+
+
+GRAFICAR CUANTOS CORRESPONDEN A UN DIA ESPECÍFICO
+	base=usuarios_sub  					tomo un df (ya el indice es la fecha)/usuarios_sub.index =usuarios_sub['fecha_fin']
+	base=base.drop(['fecha_fin', 'email'], axis=1)		borro lo que no importa	
+	base['numerico']=1					creo un contador
+	base.resample('D').sum()				Reordeno la base
+	
+
+
+GRAFICAR POR DIA
+
+El truco es que el índice del dataframe sea la hora (y sea de tipo datetime), para poder hacer un resample por el intervalo deseado, en tu caso por horas.
+
+El resample es una especie de groupby(), en el sentido de que el resultado son una serie de grupos. Cada grupo contiene todos los datos dentro de una hora. Luego puedes agregar esos grupos para contar cuántos hay con cada valor.
+
+Se me ocurren dos formas de hacerlo. Una fácil de entender, pero poco flexible. Otra mucho más automatizada, pero más difícil de entender. Te muestro ambas.
