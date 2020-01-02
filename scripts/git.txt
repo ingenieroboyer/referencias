@@ -2,4 +2,44 @@
 	imprime tras cada confirmación una lista de archivos modificados, indicando cuántos han sido modificados y cuántas líneas han sido añadidas y eliminadas para cada uno de ellos, y un resumen de toda esta información
 
 
+ETIQUETAS
+git tag
+	muestra las etiquetas activas
+
+-Anotadas
+	git tag -a v1.0 -m 'Primera versión operativa de erme en el staging'	
+
+IGNORAR LOS CAMBIOS LOCALES
+
+	git fetch --all
+	git reset --hard origin/master
+	
+	|->  Se realizará una copia local de la última versión que está en la rama origin/master sobreescribiendo todos los ficheros actuales.
+
+
+HISTÓRICO
+	git log
+DIRECTORIOS REMOTOS
+	git remote -v  
+
+TODOS LOS DIRECTORIOS
+	git remote show origin
+
+CREAR PROYECTO EXISTENTE EN EL LOCAL
+
+	git init
+	git add .
+	git commit -m "comentario"
+	git remote add origin miusuario@mihost:/home/miuser/mirepo.git
+
+CREAR UNA RAMA Y PARARSE ALLÍ
+	git checkout -b DEV
+	|-> se fusiona la rama bajada y crea
+
+POSICIONARSE EN UN MOMENTO DADO POR UN COMMIT EN PARTICULAR
+	git checkout "<ID>"
+
+
+
+
 

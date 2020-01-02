@@ -4,6 +4,14 @@ OBTENER EL DIA
 	result = sr.dt.day
 
 
+
+
+OBTENER DIFERENCIA DE DIAS DE DOS COLUMNAS DATETIME
+
+	usuarios_sub['fecha_fin'] = pd.to_datetime(usuarios_sub['fecha_fin'])
+	usuarios_sub['fecha_pago'] = pd.to_datetime(usuarios_sub['fecha_pago'])
+	usuarios_sub['diferencia']=usuarios_sub.fecha_fin-usuarios_sub.fecha_pago
+
 CONVERTIR OBJECT A DATE_TIME
 	data['fecha_fin'] = pd.to_datetime(data['fecha_fin'])
 

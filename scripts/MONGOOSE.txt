@@ -62,8 +62,15 @@ CSV
 mongoimport --db pruebas --collection cnnWorkers --type csv --headerline  --file /home/tecnoboy/CRECER/trato_data/data/trabajadadores/cnnPersonal.csv
 
 
-EXPORTAR
+EXPORTAR JSON
 mongoexport --db erme --collection workers --type json --out /home/tecnoboy/PROYECTOS/warnermedia-back-express/db/workers.json
+
+
+
+
+
+
+
 
 ///////////////////////////  AGGREGATE //////////////////////
 
@@ -109,6 +116,18 @@ db.cnnWorkers.aggregate([
         {$out : "workers"  }
 ])
 
+
+
+
+
+
+
+
+
+
+
+
+
 ////////////////
 db.cnnWorkers.aggregate([{$lookup: { from: "cnnPersonal", localField: "rut", foreignField: "rut", as: "personal" } },{$out : "workers1"  }])
 
@@ -140,6 +159,20 @@ CAMBIAR VALOR DE CAMPO EN TODOS LOS DOCUMENTOS QUE CUMPLAN CON LA CONDICIÓN DEL
 
 BUSCAR EXCLUYENDO CIERTOS CRITERIOS
 db.workers.find( { company: { $nin: [ 'cnn', 'ChileVision','cdf' ] } } )
+
+
+
+
+VALORES DIFERENTES DE UNA VARIABLE
+UNICOS
+	db.getCollection('finalmente').distinct("pais")
+
+AGRUPAR CIERTOS VALORES EN NUEVA COLLECCIÓN
+	db.workers.aggregate([{$group:{_id:"$Manager_ps",supervisados:{$push:"$$ROOT"}}},{$project:{"supervisados.admin": 0}},{ $out: "dimen_genre6" }]);
+
+
+CUENTA DE VALORES  UNICOS
+	resultado['email'].nunique()
 
 
 
@@ -181,7 +214,158 @@ mongoimport --db erme --collection CDFpiloto --file CDFpiloto.json
 mongoimport --db erme --collection roles --type json --file /home/staging/desarrollo/data/bdauxiliares_backend_erme/roles.json
 
 
+EXPORTAR EL RESULTADO DE UN QUERY
+	 mongoexport --db erme --collection nini --query '{}' --out  /home/tecnoboy/SOPORTE/miles_davis.json
+
+
+
+
+EXPORTAR CSV
+	1
+mongoimport --db erme --collection supervisados6 --type csv --fields=_id,count --file ficheroImportar.csv
+
+
+
 
 db.createUser({user: "lboyer",pwd: "dev20!",roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/*/*/********************/////////////////
+
+
+Instalar
+!pip install pandas
+
+FROM CSV
+import pandas as pd
+personal=pd.read_csv("ModeloDatos/sw_personal_201909131108.csv")
+print(personal.rut.head(2))
+
+FORMATEAR(quitar punto)
+personal.rut=personal.rut.str.replace('.','')
+
+FORMATEAR (quitar los ceros a la izquierda)
+personal.rut=personal.rut.str.lstrip('0');
+
+AÑADIR UNA COLUMNA
+personal['firstname1']=personal.nombre.str.lower()
+
+CONTAR LAS ENTRADAS DE UNA COLUMNA
+personal.email.count()
+
+ELIMINAR UNA COLUMNA
+personal=personal.drop(['ficha','codEstudios','codCajaCompens','nombres','direccion'], axis=1)
+
+
+DESCRIBIR EL DATAFRAME
+personal.info()
+
+
+TIPOS DE DATOS EN LAS COLUMNAS
+personal.dtypes
+
+
+
+
+CANTIDAD DE REGISTROS REPETIDOS
+
+
+
+MOSTRAR COLUMNAS
+personal.get("phone1")
+
+
+BUSCAR CON PYTHON
+
+Opcion 1
+personal.sort_values("phone1", inplace = False)
+filter = personal["phone1"]=="+56990896196"
+personal.where(filter)
+
+
+print (personal.where(filter,axis=1)) 
+
+Syntax:
+	DataFrame.where(cond, other=nan, inplace=False, axis=None, level=None,
+        errors=’raise’, try_cast=False, raise_on_error=None)
+ 
+
+Parameters:
+	cond: One or more condition to check data frame for.
+	other: Replace rows which don’t satisfy the condition with user defined object, 	Default is NaN
+	inplace: Boolean value, Makes changes in data frame itself if True
+	axis: axis to check( row or columns)
+
+
+Opción 2
+personal.loc[personal['phone1'] == "7498176"]
+
+	print(df.loc[df['B'].isin(['one','three'])])
+
+
+
+GUARDAR RESULTADO DE DATAFRAME COMO CSV
+personal.to_csv('preproc.csv', header=False, index=False)
+
+
+CREAR UN DATAFRAME  DE UN SPLIT 
+otro = pd.DataFrame(personal2.nombre.str.split(' ',1,expand=False).tolist(),
+                                   columns = ['nombrecito1','nombrecito2'])
+
+
+
+df = pd.read_csv('sample_data.csv',parse_dates=True)
+
+df['date'] = pd.to_datetime(df['date'])
+
+df['year'] = df['date'].year
+df['month'] = df['date'].month
+
+
+REMPLAZAR UN VALOR DADO POR OTRO
+
+prueba.loc[prueba['fechaFiniquito'].isin(['9999-12-31 00:00:00'])]
+prueba=prueba.replace("9999-12-31 00:00:00", "")
+
+
+
+
+
+*****************************
+
+db.votes.aggregate([
+   { $merge: {
+         into: "monthlytotals",
+         on: "_id",
+         whenMatched:  [
+            { $addFields: {
+                thumbsup: { $add:[ "$thumbsup", "$$new.thumbsup" ] },
+                thumbsdown: { $add: [ "$thumbsdown", "$$new.thumbsdown" ] }
+            } } ],
+         whenNotMatched: "insert"
+   } }
+])
+
+
+163060019
+
+
 
 

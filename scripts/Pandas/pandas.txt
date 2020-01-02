@@ -23,7 +23,11 @@ Encontrar APROXIMADO
 
 
 Encontrar con un criterio y presentar solo algunas columnas
+Filtrar
 	usuarios_sub.loc[(usuarios_sub['diferenciafloat'] == 42)] .filter(items=['cliente_id', 'estado'])
+
+COMPARAR ENTRE DF DIFERENTES
+	df.loc[df.Name.isin(df1.Name), ['Nonprofit', 'Education']] = df1[['Nonprofit', 'Education']]   !!!
 	
 
 Contar cuantos registros nullos tiene una columna de un dataframe
@@ -94,6 +98,12 @@ df.loc[df['column_name'] == some_value]
 Con valores iterables
 df.loc[df['column_name'].isin(some_values)]
 
+
+
+
+
+
+fmer
 Varias condiciones 
 df.loc[(df['column_name'] >= A) & (df['column_name'] <= B)]
 
@@ -135,6 +145,11 @@ CONVERTIR A STRING UNA COLUMNA
 
 Renombrar columnas
 	df.rename(columns={"A": "a", "B": "c"})
+
+
+
+
+
 
 
 
@@ -192,6 +207,12 @@ ___desde
 
 ___hacia
 	collection.insert_many(admin.to_dict('records'))
+
+
+
+CONFLICTOS CARGA:
+	Convertir a object antes de cargar
+	df[['_updated_at']] = df[['_updated_at']].astype(object).where(df[['_updated_at']].notnull(), None)
 
 
 

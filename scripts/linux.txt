@@ -1,80 +1,3 @@
-<<<<<<< HEAD
-Logearse como usuario
-
-	login staging
-
-
-Puertis TCP abiertos 
-			netstat -lt
-
-
-
-Desplegar con pm2
-	pm2 start npm --name " warnermedia-front" -- run dev	
-
-
-
-
-Ver los puertos en uso
-		netstat -putona
-		
-		sudo ss -tulpn  !!
-
-
-
-Ver la tabla de direccionamiento estático
-	ip route show
-
-Limpiar pantalla	Ctrl + l  ==  clear
-
-
-Ver datalles de los enlaces simbólicos
-	ll  === ls -l
-
-
-Ver que puertos están abiertos en otra máquina
- nmap 10.3.75.86
-
-
-CONFIGURAR MONGO PARA PERMITIR ACCESO REMOTO
-	
-
-# network interfaces
-net:
-  port: 27017
-  bindIp: 127.0.0.1,<<ip del servidorY
->> # Enter 0.0.0.0,:: to bind to all interfaces
-
-
-Matar proceso que ocupa el puerto especif
-fuser -k 3010
-
-CENTOS////
-
-
-Firewall iptable:
-
-Listar las reglas
-	iptables -L
-
-Añadir regla para paquetes entrantes TCP
-	iptables -I INPUT -p tcp -m tcp --dport 27017 -j ACCEPT
- 
-
-
-////////////////////LEVANTAR CON Nginx
-
-1.- Crear el directorio
-	sudo mkdir -p /var/www/erme/html
-
-2.- Darle permisos
-	sudo chown -R $USER:$USER /var/www/erme/html
-	sudo chmod -R 755 /var/www
-
-
-
-	
-=======
 COPIAR ARCHIVOS REMOTOS
 scp tecnoboy@10.3.67.94:/home/tecnoboy/PROYECTOS/warnermedia-back-express/db/workers.json mongoexport --db erme --collection workers --type json --out /home/tecnoboy/PROYECTOS/warnermedia-back-express/db/workers.json 
 
@@ -89,16 +12,10 @@ sudo lsof -i -P -n | grep LISTEN
 Matar el proceso bien
 kill -9 12576
 
->>>>>>> 7aa37e5e9cc668ce28f98d6f0ad6f17e53151f8e
 
 
 
 
-<<<<<<< HEAD
-
-
-
-=======
 EJEMPLOS
 scp /home/tecnoboy/TRABAJO/ModeloDatos/bdauxiliares_backend_erme.tar.xz staging@10.3.75.86:/ruta/al/directorio-destino/
 
@@ -106,4 +23,23 @@ scp /home/tecnoboy/TRABAJO/ModeloDatos/bdauxiliares_backend_erme.tar.xz staging@
 Descomprimir .xz
 
  tar -Jxvf bdauxiliares_backend_erme.tar.xzy
->>>>>>> 7aa37e5e9cc668ce28f98d6f0ad6f17e53151f8e
+
+
+REMOVER PUTTY
+sudo apt-get remove putty
+sudo apt-get remove --auto-remove putty
+sudo apt-get purge putty
+sudo apt-get purge --auto-remove putty
+
+
+
+BUSCAR EN EL SISTEMA
+Por nombre
+sudo locate nombre_archivo
+
+
+por extension
+sudo locate “*.jpg”
+
+por match
+sudo locate -c hola

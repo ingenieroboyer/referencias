@@ -29,4 +29,26 @@ pa_graf2.resample('D').sum()
 
 
 
+GRAFICAR
+df = pd.DataFrame({'date': pd.date_range('1991-01-01','2019-01-01')}).set_index('date')
+
+
+Indicando características tipo etiquetas
+	plt.figure()
+	tabla_delay.plot(kind='bar',lw=2, colormap='jet', figsize=(15,10),legend=True, fontsize=20
+         ,title='Totalización de caso Paypal')
+	plt.xlabel('Dias en retraso',fontsize=16)
+	plt.ylabel('Cantidad usuarios',fontsize=16)
+	plt.show()
+
+
+
+Indicando las columnas que se quieren graficar del df 
+	import matplotlib.pyplot as plt
+	ax = df[['V1','V2']].plot(kind='bar', title ="V comp", figsize=(15, 10), legend=True, fontsize=12)
+	ax.set_xlabel("Hour", fontsize=12)
+	ax.set_ylabel("V", fontsize=12)
+	plt.show()
+
+
 

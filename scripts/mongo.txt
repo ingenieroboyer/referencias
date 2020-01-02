@@ -234,6 +234,12 @@ db.getCollection('tareas').find({_id : { $gt : ObjectId(Math.floor(new Date(new 
 
 
 
+AGRUPAR, CONTROLAR DATOS DE SALIDA Y PUBLICAR EN OTRA COLLECCION
+db.workers.aggregate([{$group:{_id:"$Manager_ps",supervisados:{$push:"$$ROOT"}}},{$project:{"supervisados.admin": 0},{ $out: "jefatura22" }]);
+
+
+
+
 
 
 
