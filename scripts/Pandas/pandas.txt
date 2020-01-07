@@ -28,6 +28,23 @@ Filtrar
 
 COMPARAR ENTRE DF DIFERENTES
 	df.loc[df.Name.isin(df1.Name), ['Nonprofit', 'Education']] = df1[['Nonprofit', 'Education']]   !!!
+
+
+Encontrar cuando hay una clave que existe en dos dataframe
+	result3= pd.merge(users, pagagos, on=['user_id'], how='inner')
+	--> encontrará los usuarios en tabla de pagagos
+
+
+Encontrar los valores únicos irrepetidos llaves
+	acuerdosFil["tipoTarjeta"].unique()
+
+
+Recoger los registros segun última fecha , ultimos  y borrar aquellos usuarios que se duplican
+
+	acuerdosFil = acuerdos.sort_values('updatedAt').drop_duplicates(['user_id'], keep='last')
+
+
+
 	
 
 Contar cuantos registros nullos tiene una columna de un dataframe
@@ -58,7 +75,8 @@ Eliminar las filas cuando un campo es nulo
 Eliminar las filas cuando un TIENE UN VALOR ESPECÍFICO  "111111111"
 	fijo_cdf=fijo_cdf[fijo_cdf.rut != '111111111']  ##ELIMINAR
 
-
+Elimina filas cuando una columna tiene un valor null
+	grupo3 = grupo2[grupo2.fecha_pago_x.isnull()]
 
 
 
