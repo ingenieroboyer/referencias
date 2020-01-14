@@ -1,0 +1,39 @@
+CONEXIÓN Y RESPALDO DE LOS LOGS
+
+
+Se ingresa a la máquina principal (PrimaryReplicaNode00)
+	ssh -i "virginia-cdf-mongodb.pem" ec2-user@10.1.4.135
+	Se extrae el log en un txt
+		sed -n '/2019-12-01T23:00/,/2020-01-14T02:01/p' /log/mongod0.log  > /home/ec2-user/logs_Falla_EstadioCDF2.txt
+
+Se ingresa al secundario  (PrimaryReplicaNode00)
+	ssh -i "virginia-cdf-mongodb.pem" ec2-user@10.1.5.38
+	Se extrae el log en un text
+		sed -n '/2019-12-01T23:00/,/2020-01-14T02:01/p' /log/mongod0.log  > /home/ec2-user/logs_Falla_EstadioCDF.txt
+
+Se ingresa al terceario (SecondaryReplicaNode01)
+	ssh -i "virginia-cdf-mongodb.pem" ec2-user@10.1.6.9
+	Se extrae el log en un text
+
+Se recolectan los archivos desde el NAT
+sudo scp -i virginia-cdf-mongodb.pem  ec2-user@10.1.4.135:/home/ec2-user/logs_Falla_EstadioCDF2.txt /home/ec2-user/logs_Falla_EstadioCDF_10_1_4_135.txt
+
+sudo scp -i virginia-cdf-mongodb.pem  ec2-user@10.1.5.38:/home/ec2-user/logs_Falla_EstadioCDF.txt /home/ec2-user/logs_Falla_EstadioCDF_10_1_5_38.txt
+
+sudo scp -i virginia-cdf-mongodb.pem  ec2-user@10.1.6.9:/home/ec2-user/logs_Falla_EstadioCDF.txt /home/ec2-user/logs_Falla_EstadioCDF_10_1_6_9.txt
+
+
+Se recolectan en dirección local
+sudo scp -i virginia-cdf-nat.pem  ec2-user@52.45.113.248:/home/ec2-user/logs_Falla_EstadioCDF_10_1_4_135.txt /home/tecnoboy/SOPORTE/Sesions/certificadosMongo/
+sudo scp -i virginia-cdf-nat.pem  ec2-user@52.45.113.248:/home/ec2-user/logs_Falla_EstadioCDF_10_1_5_38.txt /home/tecnoboy/SOPORTE/Sesions/certificadosMongo/
+sudo scp -i virginia-cdf-nat.pem  ec2-user@52.45.113.248:/home/ec2-user/logs_Falla_EstadioCDF_10_1_6_9.txt /home/tecnoboy/SOPORTE/Sesions/certificadosMongo/
+
+
+
+comprimir el resultado en el local
+
+tar -czvf logs_Falla_EstadioCDF_10_1_4_135.tar.gz logs_Falla_EstadioCDF_10_1_4_135.txt 
+tar -czvf logs_Falla_EstadioCDF_10_1_5_38.tar.gz logs_Falla_EstadioCDF_10_1_5_38.txt 
+tar -czvf logs_Falla_EstadioCDF_10_1_6_9.tar.gz logs_Falla_EstadioCDF_10_1_6_9.txt
+
+

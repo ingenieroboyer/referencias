@@ -81,7 +81,7 @@ db.trabajadores.aggregate([{$match:{"rut":"8.210.877-7"}}]);
 AÑADIR UNA COLECCIÒN COMO EMBEBIDA EN OTRA COLECCIÓN
 db.worker.aggregate([
 {
-    $lookup: {itemDescription: { $concat: [ "machaza", " - ", "$company" ] }    }
+    $ookup: {itemDescription: { $concat: [ "machaza", " - ", "$company" ] }    }
         
 },
 

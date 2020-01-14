@@ -12,6 +12,9 @@ sudo lsof -i -P -n | grep LISTEN
 Matar el proceso bien
 kill -9 12576
 
+GUARDAR LOS LOGS EN UN PERÍODO INTERVALO DE TIEMPO
+sed -n '/2019-12-01T23:00/,/2020-01-14T02:01/p' /log/mongod0.log  > /home/ec2-user/logs_Falla_EstadioCDF.txt
+
 
 
 
@@ -23,6 +26,9 @@ scp /home/tecnoboy/TRABAJO/ModeloDatos/bdauxiliares_backend_erme.tar.xz staging@
 Descomprimir .xz
 
  tar -Jxvf bdauxiliares_backend_erme.tar.xzy
+
+Comprimir
+	 tar -czvf empaquetado.tar.gz /carpeta/a/empaquetar/
 
 
 REMOVER PUTTY

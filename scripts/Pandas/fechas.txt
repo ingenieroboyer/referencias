@@ -37,10 +37,44 @@ GRAFICAR CUANTOS CORRESPONDEN A UN DIA ESPECÍFICO
 	
 
 
-GRAFICAR POR DIA
+GRAFICAR POR DIA 
 
 El truco es que el índice del dataframe sea la hora (y sea de tipo datetime), para poder hacer un resample por el intervalo deseado, en tu caso por horas.
 
 El resample es una especie de groupby(), en el sentido de que el resultado son una serie de grupos. Cada grupo contiene todos los datos dentro de una hora. Luego puedes agregar esos grupos para contar cuántos hay con cada valor.
 
 Se me ocurren dos formas de hacerlo. Una fácil de entender, pero poco flexible. Otra mucho más automatizada, pero más difícil de entender. Te muestro ambas.
+
+
+	Ejemplo graficación de casos por día / clasifica por fecha
+		import pandas as pd
+		import matplotlib.pyplot as plt
+
+		para_graficar['fecha_cancelacion']=pd.to_datetime(para_graficar['fecha_cancelacion'])
+		para_graficar['fecha_cancelacion']=para_graficar['fecha_cancelacion'].dt.date
+		datgraf = para_graficar.groupby('fecha_cancelacion')['email'].count()
+
+		plt.figure()
+		tabla_delay.plot(kind='bar',lw=2, colormap='jet', figsize=(15,10),legend=True, fontsize=30,title='Cancelaciones histórico')
+		plt.xlabel('Dia que canceló',fontsize=20)
+		plt.ylabel('Cantidad usuarios',fontsize=20)
+		plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
