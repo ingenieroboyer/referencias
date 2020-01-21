@@ -235,7 +235,45 @@ db.getCollection('tareas').find({_id : { $gt : ObjectId(Math.floor(new Date(new 
 
 
 AGRUPAR, CONTROLAR DATOS DE SALIDA Y PUBLICAR EN OTRA COLLECCION
-db.workers.aggregate([{$group:{_id:"$Manager_ps",supervisados:{$push:"$$ROOT"}}},{$project:{"supervisados.admin": 0},{ $out: "jefatura22" }]);
+db.workers.aggregate([{$group:{_id:"$Manager_ps",supervisados:{$push:"$$ROOT"}}},{$project:{"supervisados.admin": 0},{ $out: "caArr" }]);
+
+
+
+**************************//////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\************************************
+
+||||||||||   STUDIO 3T    ||||||||||	||||||||||   STUDIO 3T    ||||||||||	||||||||||   STUDIO 3T    ||||||||||
+
+$PROJECT
+{
+   "admin": 0,
+   "personal": 0,
+   "ext": 0,
+   "lab_union": 0,
+   "register": 0,
+   "sex": 0,
+   "state": 0,
+   "personal": 0,
+   "personal": 0,
+   "personal": 0,
+   "ConcertID":0,
+   "DomainLogin":0,
+   "JobTitle":0,
+   "Manager_id":0,
+   "Manager_ps":0,
+   "PSDepartmentID":0,
+   "PersonStatus":0,
+   "_id":0,
+   "ntuser":0
+   
+}
+
+
+
+
+
+
+
+
 
 
 

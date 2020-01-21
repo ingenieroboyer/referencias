@@ -1,0 +1,72 @@
+Mis locales
+IP Workstation
+10.3.67.94
+
+
+
+
+AMAZON
+https://us-east-1.signin.aws.amazon.com/oauth?SignatureVersion=4&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMOATPLHVSJ563XQ&X-Amz-Date=2020-01-21T12%3A47%3A42.113Z&X-Amz-Signature=001e444d60558b77d5a11d13a7536e3fa0745e1bbd6456c283963653f878d818&X-Amz-SignedHeaders=host&client_id=arn%3Aaws%3Aiam%3A%3A015428540659%3Auser%2Fhomepage&redirect_uri=https%3A%2F%2Fconsole.aws.amazon.com%2Fconsole%2Fhome%3Fstate%3DhashArgs%2523%26isauthcode%3Dtrue&response_type=code&state=hashArgs%23
+
+
+Cuenta		Usuario			Contraseña		Ambiente	
+cdfcl		cquijada		Secret0mio12		Staging		Ambiente de staging
+cdf-orion	cristian.quijada	Secret0mio12		Producción	Ambiente de producción
+
+
+
+
+//////////////////////////////////////////////////////////////////
+NAT APIS
+	1 sudo ssh -i virginia-cdf-nat.pem  ec2-user@52.45.113.248
+
+Ver los logs del api principal
+	Maquina principal - AMI API-1
+	2 ssh -i "virginia-cdf-nat.pem " ec2-user@10.1.4.9
+
+	Maquina secundaria  - AMI API-2
+	ssh -i "virginia-cdf-nat.pem " ec2-user@10.1.5.94
+	
+			sudo pm2 log
+
+
+
+
+
+
+
+
+
+
+Base Datos
+Mongo
+
+
+MongoAtlas
+https://cloud.mongodb.com			 desarrollo@cdf.cl				Candad0mio12%78
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
