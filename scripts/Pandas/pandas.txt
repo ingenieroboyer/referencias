@@ -18,6 +18,9 @@ Mostrar solo un grupo de columnas
 
 
 
+convertir a minúscula / minùscula / minuscula 
+workers['DomainLogin'].str.lower()
+
 Encontrar APROXIMADO
 	db.getCollection('pilas3').find({lastname1:/.*boy.*/})
 

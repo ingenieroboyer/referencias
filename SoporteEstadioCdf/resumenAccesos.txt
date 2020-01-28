@@ -18,7 +18,7 @@ cdf-orion	cristian.quijada	Secret0mio12		Producción	Ambiente de producción
 
 //////////////////////////////////////////////////////////////////
 NAT APIS
-	1 sudo ssh -i virginia-cdf-nat.pem  ec2-user@52.45.113.248
+	1 sudo ssh -i /home/tecnoboy/SOPORTE/Sesions/certificadosMongo/virginia-cdf-nat.pem  ec2-user@52.45.113.248
 
 Ver los logs del api principal
 	Maquina principal - AMI API-1
@@ -44,6 +44,27 @@ Mongo
 
 MongoAtlas
 https://cloud.mongodb.com			 desarrollo@cdf.cl				Candad0mio12%78
+
+
+
+
+   ######   CRM   ######   ######   CRM   ######   ######   CRM   ######   ######   CRM   ######   ######   CRM   ######   ######   CRM   ######
+
+
+ssh root@10.3.75.104
+Desarrollo.CDF.2018
+nvm --version
+	
+
+
+
+
+
+
+
+   ######  API   BACKEND   ######	######  API   BACKEND   ######	######  API   BACKEND   ######	######  API   BACKEND   ######	######  API   BACKEND   ###### 
+
+ssh -i "virginia-cdf-api.pem" root@10.1.6.75
 
 
 

@@ -4,7 +4,7 @@ CONEXIÓN Y RESPALDO DE LOS LOGS
 Se ingresa a la máquina principal (PrimaryReplicaNode00)
 	ssh -i "virginia-cdf-mongodb.pem" ec2-user@10.1.4.135
 	Se extrae el log en un txt
-		sed -n '/2019-12-01T23:00/,/2020-01-14T02:01/p' /log/mongod0.log  > /home/ec2-user/logs_Falla_EstadioCDF2.txt
+		sed -n '/2020-01-14T10:00/,/2020-01-14T20:01/p' /log/mongod0.log  > /home/ec2-user/logs_Falla25202020_EstadioCDF.txt
 
 Se ingresa al secundario  (PrimaryReplicaNode00)
 	ssh -i "virginia-cdf-mongodb.pem" ec2-user@10.1.5.38
