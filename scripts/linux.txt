@@ -49,3 +49,12 @@ sudo locate “*.jpg”
 
 por match
 sudo locate -c hola
+
+
+por grep
+
+grep -irl "string" .
+
+ejemplo: grep -irl "10.3.75.86" .
+
+
