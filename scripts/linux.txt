@@ -58,6 +58,7 @@ por match
 sudo locate -c hola
 
 
+<<<<<<< HEAD
 
 DAR PERMISO A UN GRUPO HACIA UN DIRECTORIO
 
@@ -71,3 +72,18 @@ sudo chown vagrant mongodb
 
 
 
+=======
+por grep
+
+grep -irl "string" .
+
+ejemplo: grep -irl "10.3.75.86" .
+
+
+SSH  SSH   MOVER ARCHIVOS
+Desde remoto a  dirección local
+sudo scp -i virginia-cdf-nat.pem  ec2-user@52.45.113.248:/home/ec2-user/logs_Falla_EstadioCDF_10_1_4_135.txt /home/tecnoboy/SOPORTE/Sesions/certificadosMongo/
+
+Desde mi màquina hacia servidor remoto
+scp -r nombrecarpeta 10.10.10.10:/root/
+>>>>>>> 137cf88b6ff5230c33c496502f47ce08ba291247

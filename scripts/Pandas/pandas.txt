@@ -18,6 +18,9 @@ Mostrar solo un grupo de columnas
 
 
 
+convertir a minúscula / minùscula / minuscula 
+workers['DomainLogin'].str.lower()
+
 Encontrar APROXIMADO
 	db.getCollection('pilas3').find({lastname1:/.*boy.*/})
 
@@ -144,11 +147,31 @@ Eliminar duplicados por nombre de columna
 ELIMINAR VARIAS COLUMNAS
 admin=admin.drop(['id', 'nombre'], axis=1)
 
-
+AGRUPACIONES
 
 AGRUPAR Y MAXIMIZAR
 		sindicatoCNN=resultado.groupby(['ficha','valor']).agg({'mes':'max'})
 		nota: no sale un dataframe de allì, sino la serie que maximiza los valores
+
+Ver las agrupaciones
+	# Let's print the first entries 
+	# in all the groups formed. 
+	gk.first() 
+
+
+Convertir un grupo en un dataframe
+	grupo=enero.groupby('ip').nunique()
+	nuevo_df=grupo.add_suffix('_ip').reset_index()
+
+
+Ver los valores para cada agrupación
+
+	Cuando el indice es un entero
+	agrupacion.get_group(1)
+
+	cuando el indice es un string
+	gk.get_group('Boston Celtics')
+
 
 
 FUSIONAR
