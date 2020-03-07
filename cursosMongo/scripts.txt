@@ -1,0 +1,31 @@
+mongostat --port 27001 -o "time=time,dirty=dirty,used=used,insert=I, qrw=qrw,srw=arw"
+
+
+
+
+
+
+
+apagar el mongo desde la shell
+
+mongo admin --port 27001  --eval "db.shutdownServer()"
+
+
+Mirar la operacion
+
+db.system.profile.find({op:query}),pretty()
+
+
+db.setProfilingLevel(0,100) => 
+
+
+db.coleccionquequiera.find({city:"barcelona"}).explain("executionStats")
+
+
+CREAR UN INDICE
+	db.coleccionquequiera.createIndex({city:1})
+
+
+
+
+

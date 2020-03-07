@@ -1,0 +1,13 @@
+Running Node.js v13.9.0
+Se solicit{o añadir 34.221.180.170 a la whitelist de atlas
+
+Se corrió la v10.15.2 de node con nvm (nvm install v10.15.2 )
+
+
+
+
+
+
+
+Cambiar la DB test a una mas permanente
+

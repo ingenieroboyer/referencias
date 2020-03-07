@@ -18,7 +18,7 @@ cdf-orion	cristian.quijada	Secret0mio12		Producción	Ambiente de producción
 
 //////////////////////////////////////////////////////////////////
 NAT APIS
-	1 sudo ssh -i virginia-cdf-nat.pem  ec2-user@52.45.113.248
+	1 sudo ssh -i /home/tecnoboy/Soporte/sesions/virginia-cdf-nat.pem  ec2-user@52.45.113.248
 
 Ver los logs del api principal
 	Maquina principal - AMI API-1
