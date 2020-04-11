@@ -70,6 +70,11 @@ CAMBIAR EL PROPIETARIO DE UN ARCHIVO
 sudo chown vagrant mongodb
 
 
+CAMBIAR TANTO EL USUARIO COMO EL GRUPO
+
+chown tito:editors file.txt
+
+
 
 
 =======
@@ -87,3 +92,29 @@ sudo scp -i virginia-cdf-nat.pem  ec2-user@52.45.113.248:/home/ec2-user/logs_Fal
 Desde mi màquina hacia servidor remoto
 scp -r nombrecarpeta 10.10.10.10:/root/
 >>>>>>> 137cf88b6ff5230c33c496502f47ce08ba291247
+
+
+
+
+
+========================================
+	REVISAR EL SISTEMA
+========================================
+Ver la memoria RAM
+	free -m ( en mega)
+
+
+Ver el usuario
+	echo $USER
+
+Ver el tamaño del disco
+	sudo fdisk -l
+
+
+Ver el procesador
+	cat  /proc/cpuinfo
+
+
+
+
+
