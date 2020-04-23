@@ -260,6 +260,11 @@ ___hacia
 	collection.insert_many(admin.to_dict('records'))
 
 
+Extraer solo algunas columnas
+
+
+
+
 
 CONFLICTOS CARGA:
 	Convertir a object antes de cargar
@@ -276,6 +281,8 @@ sind.to_csv('sind.csv', index=False)
 
 __desde
 consindicato=pd.read_csv("/home/tecnoboy/CRECER/trato_data/data/trabajadadores/consindicato.csv")
+
+
 
 
 

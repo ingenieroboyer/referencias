@@ -6,6 +6,13 @@ db=client.get_database('pruebas')
 
 
 
+
+
+
+
+
+
+
 IMPORTAR UNA BASE DE DATOS A UN DATAFRAME
 import pymongo
 import pandas as pd
@@ -74,6 +81,44 @@ GUARDAR
 
 
 
+
+-*-*/-*/-*/-*/   -*/-*-*/-*/-*/-*/   -*/-*-*/-*/-*/-*/   -*/-*-*/-*/-*/-*/   -*/
+====>> FUNCION QUE PARTE EN PARTES LA CONSULTA, SOLO COMO REFERENCIA DE FUNCIPON QUE ITERA EL CURSOR
+
+def read_mongo(db, 
+           collection, query={}, 
+           host='localhost', port=27017, 
+           username=None, password=None,
+           chunksize = 100, no_id=True):
+#""" Read from Mongo and Store into DataFrame """
+
+# Connect to MongoDB
+#db = _connect_mongo(host=host, port=port, username=username, password=password, db=db)
+    client = MongoClient(host=host, port=port)
+# Make a query to the specific DB and Collection
+    db_aux = client[db]
+
+# Some variables to create the chunks
+    skips_variable = range(0, db_aux[collection].find(query).count(), int(chunksize))
+    if len(skips_variable)<=1:
+        skips_variable = [0,len(skips_variable)]
+
+# Iteration to create the dataframe in chunks.
+            for i in range(1,len(skips_variable)):
+    # Expand the cursor and construct the DataFrame
+    #df_aux =pd.DataFrame(list(cursor_aux[skips_variable[i-1]:skips_variable[i]]))
+            df_aux =pd.DataFrame(list(db_aux[collection].find(query)[skips_variable[i-1]:skips_variable[i]]))
+    if no_id:
+        del df_aux['_id']
+
+    # Concatenate the chunks into a unique df
+    if 'df' not in locals():
+        df =  df_aux
+    else:
+        df = pd.concat([df, df_aux], ignore_index=True)
+return df
+
+-*/-*/-*/ 
 
 
 
