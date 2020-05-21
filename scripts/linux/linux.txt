@@ -30,7 +30,7 @@ Descomprimir .xz
 
 Descomprimir .gz
 
-tar -xzvf robo3t-1.3.1-linux-x86_64-7419c406.tar.gz
+	tar -xzvf robo3t-1.3.1-linux-x86_64-7419c406.tar.gz
 
 
 
@@ -58,7 +58,6 @@ por match
 sudo locate -c hola
 
 
-<<<<<<< HEAD
 
 DAR PERMISO A UN GRUPO HACIA UN DIRECTORIO
 
@@ -85,13 +84,26 @@ grep -irl "string" .
 ejemplo: grep -irl "10.3.75.86" .
 
 
-SSH  SSH   MOVER ARCHIVOS
+
+========================================
+	SSH  SSH   MOVER ARCHIVOS
+========================================
+
+
+EXTRAYENDO
 Desde remoto a  dirección local
 sudo scp -i virginia-cdf-nat.pem  ec2-user@52.45.113.248:/home/ec2-user/logs_Falla_EstadioCDF_10_1_4_135.txt /home/tecnoboy/SOPORTE/Sesions/certificadosMongo/
 
+
+EMPUJANDO
 Desde mi màquina hacia servidor remoto
 scp -r nombrecarpeta 10.10.10.10:/root/
->>>>>>> 137cf88b6ff5230c33c496502f47ce08ba291247
+
+Hacia el NAT
+sudo scp -i virginia-cdf-nat.pem /home/tecnoboy/SOPORTE/SOPORTE/MONGO/Levantamiento/logs_2019.tar.gz ec2-user@3.92.203.95:/data/
+
+Desde el NAT hacia la máquina
+scp -i virginia-cdf-adobe.pem /home/ec2-user/logs_2019.tar.gz ubuntu@10.1.4.193:/home/ubuntu
 
 
 
@@ -112,7 +124,33 @@ Ver el tamaño del disco
 
 
 Ver el procesador
-	cat  /proc/cpuinfo
+	
+
+Sistema Operativo
+	cat /etc/os-release
+
+
+
+
+========================================
+	REVISAR REDES INALÁMBRICAS
+========================================
+
+ sudo rfkill list
+
+	0: phy0: Wireless LAN
+		Soft blocked: no
+		Hard blocked: no
+	1: dell-wifi: Wireless LAN
+		Soft blocked: no
+		Hard blocked: no
+	2: dell-bluetooth: Bluetooth
+		Soft blocked: yes
+		Hard blocked: no
+
+
+Para desbloquear
+ sudo  rfkill unblock bluetooth
 
 
 
