@@ -1,0 +1,262 @@
+===============================================================================================================
+  CUENTAS      CUENTAS      CUENTAS      CUENTAS      CUENTAS      CUENTAS      CUENTAS     
+===============================================================================================================
+
+460857846760
+leonardo.boyer
+ed{#4UJiCIoo
+
+
+cdf-orion
+leonardo.boyer
+ed{#4UJiCIoo
+
+
+
+MACHAZA   /******************/  MACHAZA /******************/  MACHAZA /******************/  MACHAZA 
+
+FQDN: CHVDATAINSIDE01.turner.com
+IP: 10.3.75.117
+OS: Centos 7.7
+RAM: 16 GB (inicial)
+Distribución del Disco:  / 500 GB, swap 8 GB, /home 2 GB
+ 
+
+password:“turner.2020” 
+users:
+mpalencia
+lboyer
+rrodriguez
+
+
+
+MongoUniversity
+cJajb@gbz$t37FL
+
+
+
+
+
+===============================================================================================================
+  PRODUCTIVO      PRODUCTIVO      PRODUCTIVO      PRODUCTIVO      PRODUCTIVO      PRODUCTIVO      PRODUCTIVO     
+===============================================================================================================
+Conexion al nat
+sudo ssh -i virginia-cdf-nat.pem  ec2-user@52.45.113.248
+
+Se ingresa a la máquina principal (PrimaryReplicaNode00)
+	ssh -i "virginia-cdf-mongodb.pem" ec2-user@10.1.4.135
+
+Se ingresa al secundario  (PrimaryReplicaNode00)
+	ssh -i "virginia-cdf-mongodb.pem" ec2-user@10.1.5.38
+
+Se ingresa al terceario (SecondaryReplicaNode01)
+	ssh -i "virginia-cdf-mongodb.pem" ec2-user@10.1.6.9
+
+
+=============================================================================
+  TESTING      TESTING      TESTING      TESTING      TESTING      TESTING      
+=============================================================================
+Conexion al nat
+sudo ssh -i virginia-cdf-nat.pem  ec2-user@3.92.203.95
+
+Se ingresa a la máquina principal (PrimaryReplicaNode00)
+	ssh -i "virginia-cdf-mongodb.pem" ec2-user@10.1.4.42
+
+Se ingresa al secundario  (PrimaryReplicaNode00)
+	ssh -i "virginia-cdf-mongodb.pem" ec2-user@10.1.5.28
+
+Se ingresa al terceario (SecondaryReplicaNode01)
+	ssh -i "virginia-cdf-mongodb.pem" ec2-user@10.1.6.170
+
+
+=============================================================================
+  ClusterAtlas/testing      ClusterAtlas/testing      ClusterAtlas/testing            
+=============================================================================
+Replicaset:atlas-mdi95r-shard-0
+
+
+
+mongo "mongodb+srv://cdfmaster-dev.pgdkn.mongodb.net/cdfMaster_dev" --username cdfdev_app
+Password:BCRbNfGUtpxTvguq
+
+
+mongo "mongodb+srv://cdfmaster-dev.pgdkn.mongodb.net/cdfMaster_dev" --username cdfdev_ro
+Password: fo2VFsCwDzDS8dgv
+
+
+=============================================================================
+  ClusterAtlas/product      ClusterAtlas/product      ClusterAtlas/product            
+=============================================================================
+Credenciales MongoProducción
+
+
+
+cdfprod_app : tZJ8IPs7A63PWkHb
+cdfprod_ro: IxkkLxrWsVlkbBSa
+mongodb+srv://<username>:<password>@cdfmaster-prod.nhfqf.mongodb.net/cdfMaster_prod?retryWrites=true&w=majority
+
+
+
+string de conexión Studio 3T
+mongodb+srv://cdfprod_app@cdfmaster-prod.nhfqf.mongodb.net/admin?replicaSet=atlas-13mabd-shard-0&readPreference=primary&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1&3t.uriVersion=3&3t.connection.name=estadioECDF-PROD&3t.databases=admin,cdfmaster-prod
+
+
+-----
+String MongoSHELL	String MongoSHELL	String MongoSHELL
+
+mongo "mongodb+srv://cdfmaster-prod.nhfqf.mongodb.net/cdfMaster_pro" --username cdfprod_app
+Password: tZJ8IPs7A63PWkHb
+----
+
+
+COMANDOS UTILES
+=============================================================================
+  UPSTREAM - DOWNSTREAM      UPSTREAM - DOWNSTREAM     UPSTREAM - DOWNSTREAM       =============================================================================
+SUBIENDO LOGS
+
+sudo scp -i virginia-cdf-nat.pem /home/tecnoboy/SOPORTE/SOPORTE/MONGO/Levantamiento/logs_2019.tar.gz ec2-user@3.92.203.95:/home/ec2-user
+scp -i virginia-cdf-adobe.pem /home/ec2-user/logs_2019.tar.gz ubuntu@10.1.4.193:/home/ubuntu/home/ec2-user
+
+BAJANDO 
+sudo scp -i virginia-cdf-mongodb.pem  ec2-user@10.1.4.135:/home/ec2-user/logs_Falla25202020_EstadioCDF_10-1-4-135.txt /home/ec2-user/queries.txt 
+
+
+scp -i virginia-cdf-adobe.pem  ubuntu@10.1.4.193:/home/ubuntu/home/ec2-user/queries.txt  /home/ec2-user
+scp -i virginia-cdf-nat.pem  ec2-user@3.92.203.95:/home/ec2-user/queries.txt  /home/tecnoboy/SOPORTE/SOPORTE/MONGO/
+
+Comprimiendo
+tar -czvf /home/ec2-user/logs_Falla25202020_EstadioCDF_10-1-4-135.tar.gz /home/ec2-user/logs_Falla25202020_EstadioCDF_10-1-4-135.txt
+
+
+
+
+
+
+
+==========================================================================================
+  MONGO OPERATIONS      MONGO OPERATIONS    MONGO OPERATIONS    MONGO OPERATIONS       
+==========================================================================================
+
+SHELL   SHELL   SHELL   SHELL   SHELL   SHELL   
+
+
+Gettiong the ips:
+
+db.currentOp(true).inprog.reduce((accumulator, connection) => { ipaddress = connection.client ? connection.client.split(":")[0] : "Internal"; accumulator[ipaddress] = (accumulator[ipaddress] || 0) + 1; accumulator["TOTAL_CONNECTION_COUNT"]++; return accumulator; }, { TOTAL_CONNECTION_COUNT: 0 })
+
+
+Ingresos
+Con un usuario
+db.auth("cdfdev_app", "BCRbNfGUtpxTvguq")	
+
+Hacia un segundario de un replicaset dado
+db= connect("m312:27001/test")
+
+
+
+
+cdfdev_app
+Password:BCRbNfGUtpxTvguq
+
+mongodb+srv://cdfdev_app:BCRbNfGUtpxTvguq@cdfmaster-dev.pgdkn.mongodb.net/cdfMaster_pro?retryWrites=true&w=majority
+
+
+ 253922818
+
+
+___
+MACHINE/HOST      MACHINE/HOST      MACHINE/HOST      MACHINE/HOST      MACHINE/HOST      
+____
+
+To see the memory allocation every 2  seconds
+watch -n 2 free  -h 
+
+
+
+
+
+
+==========================================================================================
+  MONGO COMMANDS      MONGO COMMANDS    MONGO COMMANDS    MONGO COMMANDS      MONGO COMMANDS       
+==========================================================================================
+db.opCurrent()
+
+Ver los registro del profiler
+db.profiler_data.aggregate([{$group:{_id:"$op",count:{$sum:1}}}])
+
+
+
+Levantamiento/recopilacionPrimario
+sudo lsof -i -P -n | grep LISTEN
+
+
+Tomando el dump 
+sudo mongodump --port 27018 --out /data
+
+mongodump --port 27018 --db cdfMaster --collection identitycounters  --gzip --out /data
+
+
+
+AUTORIZAR LA LECTURA EN SECUNDARIO
+db.getMongo().setSlaveOk()
+
+
+
+
+PRODUCCIÓN
+
+api1
+        'database': 'mongodb://10.1.4.135:27018,10.1.6.9:27018,10.1.5.38:27018/cdfMaster?readPreference=nearest',
+api2
+	'database': 'mongodb://10.1.4.135:27018,10.1.6.9:27018,10.1.5.38:27018/cdfMaster?readPreference=nearest',
+TESTING
+api1
+	'database': 'mongodb+srv://cdfdev_app:BCRbNfGUtpxTvguq@cdfmaster-dev.pgdkn.mongodb.net/cdfMaster_dev?retryWrites=true&w=majority'
+api2
+	'database': 'mongodb+srv://cdfdev_app:BCRbNfGUtpxTvguq@cdfmaster-dev.pgdkn.mongodb.net/cdfMaster_dev?retryWrites=true&w=majority'
+
+
+
+Analizar querys ////  Schema optimizer  /////
+
+which querys are taken more than 30 ms
+db.system.profile.find({millis:{$gt:30}}).pretty()
+
+
+db.system.profile.find({op: {$eq: “command” }}).sort({millis:-1}).limit(10).pretty();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+  Appliances    Appliances    Appliances    Appliances    Appliances    Appliances          
+==========================================================================================
+
+db.currentOp(true).inprog.reduce(   (accumulator, connection) => {     ipaddress = connection.client ? connection.client.split(":")[0] : "Internal";     accumulator[ipaddress] = (accumulator[ipaddress] || 0) + 1;     accumulator["TOTAL_CONNECTION_COUNT"]++;     return accumulator;   },   { TOTAL_CONNECTION_COUNT: 0 } )
+
+
+
+
+
+
+
+
+
+
+
+
+

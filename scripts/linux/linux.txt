@@ -1,8 +1,5 @@
-COPIAR ARCHIVOS REMOTOS
-scp tecnoboy@10.3.67.94:/home/tecnoboy/PROYECTOS/warnermedia-back-express/db/workers.json mongoexport --db erme --collection workers --type json --out /home/tecnoboy/PROYECTOS/warnermedia-back-express/db/workers.json 
-
-Copiar un archivo local a un destino remoto
-scp /ruta/al/archivo-origen usuario@ordenador:/ruta/al/directorio-destino/
+Hacer ping a un puerto
+nmap -p 80 3.92.203.95
 
 
 PUERTOS ACTIVOS
@@ -36,6 +33,9 @@ Descomprimir .gz
 
 Comprimir
 	 tar -czvf empaquetado.tar.gz /carpeta/a/empaquetar/
+Comprimir varios directorios
+tar -zcvf my-compressed.tar.gz /path/to/dir1/ /path/to/dir2/
+
 
 
 REMOVER PUTTY
@@ -51,11 +51,17 @@ Por nombre
 sudo locate nombre_archivo
 
 
+
 por extension
 sudo locate “*.jpg”
 
 por match
 sudo locate -c hola
+
+
+por contenido 
+grep -r -i usersautomaticos /home/tecnoboy/APIS-WARNER/api-backend-ecdf
+
 
 
 
@@ -108,7 +114,6 @@ scp -i virginia-cdf-adobe.pem /home/ec2-user/logs_2019.tar.gz ubuntu@10.1.4.193:
 
 
 
-
 ========================================
 	REVISAR EL SISTEMA
 ========================================
@@ -122,6 +127,9 @@ Ver el usuario
 Ver el tamaño del disco
 	sudo fdisk -l
 
+
+Ver el disk space
+	sudo df -H
 
 Ver el procesador
 	

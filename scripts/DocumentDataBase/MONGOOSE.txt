@@ -1,3 +1,7 @@
+Ver la versión de mongoose
+npm list -g | grep mongoose
+
+
 CRUD
 
 Crear un documento dentro de una collección
@@ -115,6 +119,8 @@ db.cnnWorkers.aggregate([
 
         {$out : "workers"  }
 ])
+
+
 
 
 

@@ -51,6 +51,10 @@ db.getCollection('tareas').find({_id : { $gt : ObjectId(Math.floor(new Date(new 
 
 REPALDO MEDIANTE DUMP
 mongodump --db ee_data --port 28999  (no desde mongodb ejecutandose)
+
+mongodump --port 27018 --db cdfMaster --collection identitycounters  --gzip --out /data
+
+
 tar -czvf dump.tar.gz dump
 
 scp uper@192.168.1.119:/home/uper/dump.tar.gz /home/tecnoboy/Desarrollo/Data
@@ -151,25 +155,6 @@ db.DataEstructurada.update({"tension":{$exists:true}},{$unset:{"contexto":""}},{
 ////////////////////
 PARA REVISAR
 
-OBTENER EL AÑO
-
-db.p.aggregate(
-    { $match : { "tag" : {$in : [/2019-06/]}}},
-    { $group : {
-        tag: {
-            year :  { $substr : ["$tag", 0, 4 ] },   
-            month : { $substr : ["$tag", 5, 2 ] },                                      
-            day :   { $substr : ["$tag", 8, 2 ] },        
-        },
-        count: { $sum: 1 }
-    }
-              },
-    { $sort : {tag : -1}}
-);
-
-
-
-db.DataEstructurada.find({"tag":{year:"$tag"}})
 
 
 
@@ -178,21 +163,6 @@ db.DataEstructurada.find({"tag":{year:"$tag"}})
 
 
 
-
-
-
-
-
-
-
-
-CREAR EL USUARIO ADMIN
-db.addUser(
-  {
-    user: "lboyer",
-    pwd: "uper19!",
-    roles: [ { role: "root", db: "admin" } ]
-  })
 
 
 db.piloto.aggregate( { $group: { _id: { $dayOfYear: "$tag"} } } )
@@ -266,6 +236,54 @@ $PROJECT
    "ntuser":0
    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+  DATABASE ADMINISTRATION	  DATABASE ADMINISTRATION	  DATABASE ADMINISTRATION	  DATABASE ADMINISTRATION   
+---------------------------------------------------------------------------------------------------------------------------
+
+CREAR EL USUARIO ADMIN
+db.addUser(
+  {
+    user: "lboyer",
+    pwd: "uper19!",
+    roles: [ { role: "root", db: "admin" } ]
+  })
+
+
+
+
+Ver las IP que se conectan actualmente
+db.currentOp(true).inprog.reduce(   (accumulator, connection) => {     ipaddress = connection.client ? connection.client.split(":")[0] : "Internal";     accumulator[ipaddress] = (accumulator[ipaddress] || 0) + 1;     accumulator["TOTAL_CONNECTION_COUNT"]++;     return accumulator;   },   { TOTAL_CONNECTION_COUNT: 0 } )
+
+
+
+
+
+
+
+
+
+
 
 
 

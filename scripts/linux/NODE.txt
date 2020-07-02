@@ -12,6 +12,10 @@ Revisar cuantas apps están arribas por forever
 
 	forever list
 
+
+Ver las dependencias instaladas
+npm ls
+
  
 
 
