@@ -223,7 +223,12 @@ which querys are taken more than 30 ms
 db.system.profile.find({millis:{$gt:30}}).pretty()
 
 
-db.system.profile.find({op: {$eq: “command” }}).sort({millis:-1}).limit(10).pretty();
+db.system.profile.find({op: {$eq: “command” }}).sort({millis:-1}).limit(10).pretty()
+
+
+
+
+db.system.profile.find({},{planSummary:1,op:1,query:1,ns:1}).pretty()
 
 
 
