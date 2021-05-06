@@ -21,8 +21,7 @@ Mostrar solo un grupo de columnas
 convertir a minúscula / minùscula / minuscula 
 workers['DomainLogin'].str.lower()
 
-Encontrar APROXIMADO
-	db.getCollection('pilas3').find({lastname1:/.*boy.*/})
+
 
 
 Encontrar con un criterio y presentar solo algunas columnas
@@ -31,6 +30,17 @@ Filtrar
 
 COMPARAR ENTRE DF DIFERENTES
 	df.loc[df.Name.isin(df1.Name), ['Nonprofit', 'Education']] = df1[['Nonprofit', 'Education']]   !!!
+
+
+Uso de map
+df['filename'] = df['filename'].map(lambda x: str(x)[:-4])
+
+uso de replace
+df['filename'] = df['filename'].str.replace(r'.txt$', '')
+
+
+
+ 
 
 
 Encontrar cuando hay una clave que existe en dos dataframe
@@ -59,9 +69,12 @@ Si una columna tiene un valor
 
 
 Quitar con un valor especìfico
-df[df.name != 'Tina']
+df[df.name !=Tina']																																																																																																													
 
+NUEVO DF QUE RESTA UN Df2 DE UN Df1
 
+pd.concat([Wird_user, acknowledge, acknowledge]).drop_duplicates(keep=False)
+  nota: acknowledge tiene el subdataframe
 
 
 NUEVO DF CON SOLO ALGUNAS COLUMNAS DE OTRO DF
@@ -78,8 +91,40 @@ Eliminar las filas cuando un campo es nulo
 Eliminar las filas cuando un TIENE UN VALOR ESPECÍFICO  "111111111"
 	fijo_cdf=fijo_cdf[fijo_cdf.rut != '111111111']  ##ELIMINAR
 
-Elimina filas cuando una columna tiene un valor null
-	grupo3 = grupo2[grupo2.fecha_pago_x.isnull()]
+Elimina filas cuando una columna tiene un valor null 
+	
+...................
+
+
+REGEX
+
+print df['date'].astype(str).str[-36:].str.contains('1954')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+grupo3 = grupo2[grupo2.fecha_pago_x.isnull()]
 
 
 
@@ -120,8 +165,11 @@ Con valores iterables
 df.loc[df['column_name'].isin(some_values)]
 
 
+	
 
 
+Buscar por REGEX
+cuponeraSegundo[cuponeraSegundo['nombre'].str.contains('^MKT')==True]
 
 
 fmer

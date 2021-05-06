@@ -5,6 +5,9 @@ nmap -p 80 3.92.203.95
 PUERTOS ACTIVOS
 sudo lsof -i -P -n | grep LISTEN
 
+NETSTAT
+sudo netstat-putona
+
 
 Matar el proceso bien
 kill -9 12576
@@ -62,7 +65,8 @@ sudo locate -c hola
 por contenido 
 grep -r -i usersautomaticos /home/tecnoboy/APIS-WARNER/api-backend-ecdf
 
-
+Tiempo de ejecución de un proceso:
+ps -p 8735 -o etime
 
 
 DAR PERMISO A UN GRUPO HACIA UN DIRECTORIO
@@ -130,6 +134,11 @@ Ver el tamaño del disco
 
 Ver el disk space
 	sudo df -H
+
+Ver el uso de disco en subdirectorios del raiz
+ sudo du -shxc /*
+   nota: h es para que sea amigable a la vista
+
 
 Ver el procesador
 	

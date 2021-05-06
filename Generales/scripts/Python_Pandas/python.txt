@@ -1,3 +1,7 @@
+VER LAS VERSIONES INSTALADAS
+!pip freeze
+
+
 CONECTAR CON MONGO
 
 from pymongo import MongoClient
@@ -118,7 +122,47 @@ def read_mongo(db,
         df = pd.concat([df, df_aux], ignore_index=True)
 return df
 
--*/-*/-*/ 
+-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/
+ 
+
+AÑADIR ELEMENTOS A UNA LISTA 
+
+LIST=[]
+
+Elemento a elemento:
+fruits = ["Apple", "Banana"]
+# 1. append()  
+print(f'Current Fruits List {fruits}')
+#Desde la entrada estandar
+f = input("Please enter a fruit name:\n")
+fruits.append(f)				<====  ! es como el push de Paython
+print(f'Updated Fruits List {fruits}')
+
+Elemento a elemento controlando la posición(indexado):
+num_list = [1, 2, 3, 4, 5]
+print(f'Current Numbers List {num_list}')
+
+# Desde la entrada estandar
+num = int(input("Please enter a number to add to list:\n"))
+index = int(input(f'Please enter the index between 0 and {len(num_list) - 1} to add the number:\n'))
+
+num_list.insert(index, num)                     <====  ! 
+print(f'Updated Numbers List {num_list}')
+
+
+
+Por extensión  
+list_num = []
+list_num.extend([1, 2])  # extending list elements
+print(list_num)
+list_num.extend((3, 4))  # extending tuple elements
+print(list_num)
+list_num.extend("ABC")  # extending string elements
+print(list_num)
+
+
+
+
 
 
 
